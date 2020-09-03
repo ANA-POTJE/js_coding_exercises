@@ -10,8 +10,23 @@ function getSquares(nums) {
 
 function camelCaseWords(words) {
   if (words === undefined) throw new Error("words is required");
-  // Your code here!
+  
+  function toCamelCase(str) {
+    return str.toLowerCase().replace(/(?:(^.)|(\s+.))/g, function(match) {
+        return match.charAt(match.length-1).toUpperCase();
+    });
+  }
+
+  for (let key in words){
+    if (key == 0) {
+      new_word = words[key];
+    } else{
+      new_word = new_word + toCamelCase(words[key]);
+    }
+  }
+  return(new_word)
 }
+
 
 function getTotalSubjects(people) {
   if (people === undefined) throw new Error("people is required");
