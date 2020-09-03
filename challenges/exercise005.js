@@ -67,8 +67,18 @@ const arrShift = arr => {
 const findNeedle = (haystack, searchTerm) => {
   if (haystack === undefined) throw new Error("haystack is required");
   if (searchTerm === undefined) throw new Error("searchTerm is required");
-  // Your code here!
+  
+  for (const key in haystack) {
+    prop = `${haystack[key]}`
+
+    new_prop = prop.toUpperCase()
+    if (new_prop.includes(searchTerm.toUpperCase())){
+      return(true)
+    }
+  }
+  return(false)
 };
+
 
 const getWordFrequencies = str => {
   if (str === undefined) throw new Error("str is required");
