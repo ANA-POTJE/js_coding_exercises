@@ -26,10 +26,13 @@ const count1sand0s = str => {
   return(count(str))
 };
 
-
 const reverseNumber = n => {
   if (n === undefined) throw new Error("n is required");
-  // Your code here!
+  
+  function reverseNumber(num){
+    return Number(String(num).split("").reverse().join(""))
+  }
+  return(reverseNumber(n))
 };
 
 const sumArrays = arrs => {
