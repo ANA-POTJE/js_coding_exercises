@@ -29,7 +29,16 @@ function findNamesBeginningWith(names, char) {
 
 function findVerbs(words) {
   if (!words) throw new Error("words is required");
-  // Your code here
+  
+  new_arr = [];
+  newkey = 0
+  for (let key in words){
+    if (words[key].startsWith("to ")){
+      new_arr[newkey] = words[key];
+      newkey = newkey + 1
+    }
+  }
+  return(new_arr);
 }
 
 function getIntegers(nums) {
