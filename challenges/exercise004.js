@@ -81,7 +81,7 @@ function findSentencesContaining(sentences, str) {
 
   new_arr = [];
   newkey = 0
-  
+
   for (let key in sentences){
     new_sent = sentences[key].toUpperCase()
     
@@ -95,7 +95,21 @@ function findSentencesContaining(sentences, str) {
 
 function getLongestSides(triangles) {
   if (!triangles) throw new Error("triangles is required");
-  // Your code here
+  
+  function findMax(arr) {
+    if (!arr) {
+      return;
+    }
+    return Math.max(...arr);
+  }
+
+  new_arr = [];
+  newkey = 0
+  for (let key in triangles){
+    new_arr[newkey] = findMax(triangles[key])
+    newkey = newkey + 1
+  }
+  return(new_arr);
 }
 
 module.exports = {
