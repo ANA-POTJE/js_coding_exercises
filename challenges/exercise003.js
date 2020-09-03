@@ -59,7 +59,16 @@ function checkIngredients(menu, ingredient) {
 function duplicateNumbers(arr1, arr2) {
   if (arr1 === undefined) throw new Error("arr1 is required");
   if (arr2 === undefined) throw new Error("arr2 is required");
-  // Your code here!
+  
+  var array_intersection = arr1.filter(function(x) {
+    // checking second array contains the element "x"
+    if(arr2.indexOf(x) != -1)
+      return true;
+    else
+      return false;
+  });
+  filtered_array_intersection = [...new Set(array_intersection)].sort();
+  return(filtered_array_intersection)
 }
 
 module.exports = {
