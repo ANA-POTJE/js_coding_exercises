@@ -128,6 +128,23 @@ const areWeCovered = (staff, day) => {
   if (staff.length === 0) {
     return(false);
   }
+  if (day != "Monday" && day != "Tuesday" && day != "Wednesday" && day != "Thursday"
+      && day != "Friday" && day != "Saturday" && day != "Sunday") 
+    throw new Error("day is not valid");
+  
+  count_staff = 0
+  staff.forEach(n => {
+    rota_days = n.rota
+
+    if (rota_days.includes(day)) {
+      count_staff += 1
+    }
+  })
+  if (count_staff < 3) {
+    return(false)
+  } else {
+    return(true)
+  }
 };
 
 module.exports = {

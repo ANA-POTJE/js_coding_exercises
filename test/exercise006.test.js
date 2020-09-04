@@ -3,7 +3,8 @@ const {
     isValidDNA,
     getComplementaryDNA,
     isItPrime,
-    createMatrix
+    createMatrix,
+    areWeCovered
 } = require("../challenges/exercise006");
 
 const { TestScheduler } = require("jest");
@@ -191,4 +192,56 @@ describe("createMatrix", () => {
         expect(result).toEqual(expected);
     });
 
+});
+
+describe("areWeCovered", () => {
+    test("it throws an error if NO day is passed.", () => {
+        expect(() => {
+            areWeCovered([{name: "gary", rota: ["Monday"]}]);
+        }).toThrow("day is required");
+    });
+
+    test("it throws an error if day is not valid.", () => {
+        expect(() => {
+            areWeCovered([{name: "gary", rota: ["Monday"]}], "xxxx");
+        }).toThrow("day is not valid");
+        expect(() => {
+            areWeCovered([{name: "gary", rota: ["Monday"]}], "Sat");
+        }).toThrow("day is not valid");
+    });
+
+    test("it returns false if there are no staff at all.", () => {
+        expect(areWeCovered([], "Sunday")).toBe(false);
+        expect(areWeCovered([], "Monday")).toBe(false);
+        expect(areWeCovered([], "Tuesday")).toBe(false);
+        expect(areWeCovered([], "Wednesday")).toBe(false);
+        expect(areWeCovered([], "Thursday")).toBe(false);
+        expect(areWeCovered([], "Friday")).toBe(false);
+        expect(areWeCovered([], "Saturday")).toBe(false);
+    });
+
+    test("returns false if there are staff but < 3 are not scheduled to work.", () => {
+        const staff = [
+            {name: "gary", rota: ["Monday", "Tuesday"]},
+            {name: "paul", rota: ["Monday", "Tuesday"]},
+            {name: "sally", rota: ["Monday", "Tuesday"]},
+            {name: "jess", rota: ["Monday", "Tuesday"]},
+        ];
+        expect(areWeCovered(staff, "Wednesday")).toBe(false);
+        expect(areWeCovered(staff, "Thursday")).toBe(false);
+        expect(areWeCovered(staff, "Friday")).toBe(false);
+        expect(areWeCovered(staff, "Saturday")).toBe(false);
+        expect(areWeCovered(staff, "Sunday")).toBe(false);
+    });
+
+    test("returns true if there are >= 3 staff scheduled to work.", () => {
+        const staff = [
+            {name: "gary", rota: ["Monday", "Tuesday"]},
+            {name: "paul", rota: ["Monday", "Tuesday"]},
+            {name: "sally", rota: ["Monday", "Tuesday"]},
+            {name: "jess", rota: ["Wednesday", "Tuesday"]},
+        ];
+        expect(areWeCovered(staff, "Monday")).toBe(true);
+        expect(areWeCovered(staff, "Tuesday")).toBe(true);
+    });
 });
