@@ -4,6 +4,14 @@
  */
 const sumDigits = n => {
   if (n === undefined) throw new Error("n is required");
+  if (n.constructor != Number) throw new Error("a number is required");
+
+  function sumDig(n) {
+    return n.toString().match(/-?\d/g).reduce(function(a, b) {
+        return +a + +b;
+      });
+  }
+  return(sumDig(n));
 };
 
 /**
@@ -16,7 +24,26 @@ const sumDigits = n => {
  */
 const createRange = (start, end, step) => {
   if (start === undefined) throw new Error("start is required");
-  if (end === undefined) throw new Error("end is required");
+  if (end === undefined) throw new Error("a number is required");
+  if (start.constructor != Number) throw new Error("a number is required");
+  if (end < start) throw new Error("end value must be greater than start value");
+  if (end === start) throw new Error("end value is equal to start value");
+  if (step === undefined) {
+    step = 1;
+  }
+
+  arr = [];
+  last_value_in_array = 0
+  curr_value = start
+  i = 0
+  while (curr_value <= end) {
+    arr[i] = curr_value
+    last_value_in_array = curr_value
+    curr_value = curr_value + step
+    i++;
+  }
+  if (last_value_in_array != end) throw new Error("end value not included in the array!");
+  return(arr);
 };
 
 /**
