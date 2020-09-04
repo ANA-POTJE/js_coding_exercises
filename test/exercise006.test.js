@@ -1,4 +1,4 @@
-const {sumMultiples} = require("../challenges/exercise006");
+const {sumMultiples, isValidDNA} = require("../challenges/exercise006");
 const { TestScheduler } = require("jest");
 
 describe("sumMultiples", () => {
@@ -32,5 +32,35 @@ describe("sumMultiples", () => {
         expect(sumMultiples([1, 2, 8, 13, 7])).toBe(0);
     })
 
+});
+
+describe("isValidDNA", () => {
+    test("it throws an error if not passed a string.", () => {
+        expect(() => {
+            isValidDNA();
+        }).toThrow("str is required");
+
+        expect(() => {
+            isValidDNA(4);
+        }).toThrow("a string is required");
+
+        expect(() => {
+            isValidDNA(true);
+        }).toThrow("a string is required");
+    });
+
+    test("returns false if string has a character other than  C, G, T or A", () => {
+        expect(isValidDNA("CGTX")).toBe(false);
+        expect(isValidDNA("QT")).toBe(false);
+        expect(isValidDNA("RYT")).toBe(false);
+        expect(isValidDNA(" ")).toBe(false);
+        expect(isValidDNA("CCC AAA")).toBe(false);
+    });
+    
+    test("returns true if string has only  C, G, T or A", () => {
+        expect(isValidDNA("C")).toBe(true);
+        expect(isValidDNA("TAA")).toBe(true);
+        expect(isValidDNA("GCTAGCTA")).toBe(true);
+    });
 });
 

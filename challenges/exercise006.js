@@ -24,6 +24,12 @@ const sumMultiples = arr => {
  */
 const isValidDNA = str => {
   if (str === undefined) throw new Error("str is required");
+  if (str.constructor != String) throw new Error("a string is required");
+
+  if(str.match(/[^GCTA]/)){ //if dnaArray contains anything that isn't G,T,C,A
+    return(false)
+  }
+  return(true)
 };
 
 /**
