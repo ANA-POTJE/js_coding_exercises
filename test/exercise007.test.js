@@ -1,7 +1,9 @@
 const {
     sumDigits,
     createRange,
-    getScreentimeAlertList
+    getScreentimeAlertList,
+    hexToRGB,
+    findWinner
 } = require("../challenges/exercise007");
 
 const { TestScheduler } = require("jest");
@@ -154,3 +156,35 @@ describe("getScreentimeAlertList", () => {
     });
 });
 
+describe("hexToRGB", () => {
+    test("it throws an error if not passed the hexStr input parameter.", () => {
+        expect(() => {
+            hexToRGB();
+        }).toThrow("hexStr is required");
+
+        expect(() => {
+            hexToRGB(4);
+        }).toThrow("hexStr is required");
+
+        expect(() => {
+            hexToRGB(true);
+        }).toThrow("hexStr is required");
+    });
+
+    test("it throws an error if the hexadecimal format is wrong.", () => {
+        expect(() => {
+            hexToRGB("WWWWWW");
+        }).toThrow("The number is not an Hexadecimal");
+        expect(() => {
+            hexToRGB("XXXXXX");
+        }).toThrow("The number is not an Hexadecimal");
+    });
+
+    test("if passed #FF1133 returns rgb(255,17,51).", () => {
+        expect(hexToRGB("#FF1133")).toBe("rgb(255,17,51)");
+    });    
+    test("if passed #0080C0 returns rgb(0,128,192).", () => {
+        expect(hexToRGB("#0080C0")).toBe("rgb(0,128,192)");
+    });    
+
+});
