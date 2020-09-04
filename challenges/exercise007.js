@@ -126,7 +126,7 @@ const hexToRGB = hexStr => {
     } : null;
   }
   rgb = hexRgb(hexStr);
-  return('rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')');
+  return('rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')')
 };
 
 /**
