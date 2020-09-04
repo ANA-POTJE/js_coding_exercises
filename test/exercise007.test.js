@@ -2,8 +2,8 @@ const {
     sumDigits,
     createRange,
     getScreentimeAlertList,
-    hexToRGB,
-    findWinner
+    hexToRGB
+//    findWinner
 } = require("../challenges/exercise007");
 
 const { TestScheduler } = require("jest");
