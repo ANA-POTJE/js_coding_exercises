@@ -26,7 +26,7 @@ const isValidDNA = str => {
   if (str === undefined) throw new Error("str is required");
   if (str.constructor != String) throw new Error("a string is required");
 
-  if(str.match(/[^GCTA]/)){ //if dnaArray contains anything that isn't G,T,C,A
+  if (str.match(/[^GCTA]/)){ //if dnaArray contains anything that isn't G,T,C,A
     return(false)
   }
   return(true)
@@ -39,6 +39,18 @@ const isValidDNA = str => {
  */
 const getComplementaryDNA = str => {
   if (str === undefined) throw new Error("str is required");
+  if (str.constructor != String) throw new Error("a string is required");
+  if (str.match(/[^GCTA]/)) throw new Error("string must only have characters CGTA!");
+
+  str = str.replace(/T/g, "X");
+  str = str.replace(/A/g, "T");
+  str = str.replace(/X/g, "A");
+
+  str = str.replace(/C/g, "Y");
+  str = str.replace(/G/g, "C");
+  str = str.replace(/Y/g, "G");
+
+  return(str)
 };
 
 /**

@@ -1,4 +1,9 @@
-const {sumMultiples, isValidDNA} = require("../challenges/exercise006");
+const {
+    sumMultiples, 
+    isValidDNA,
+    getComplementaryDNA
+} = require("../challenges/exercise006");
+
 const { TestScheduler } = require("jest");
 
 describe("sumMultiples", () => {
@@ -64,3 +69,36 @@ describe("isValidDNA", () => {
     });
 });
 
+describe("getComplementaryDNA", () => {
+    test("it throws an error if not passed a string.", () => {
+        expect(() => {
+            getComplementaryDNA();
+        }).toThrow("str is required");
+
+        expect(() => {
+            getComplementaryDNA(4);
+        }).toThrow("a string is required");
+
+        expect(() => {
+            getComplementaryDNA(true);
+        }).toThrow("a string is required");
+    });
+
+    test("it throws an error if a string passed has characters other than CGTA.", () => {
+        expect(() => {
+            getComplementaryDNA("SSQQ");
+        }).toThrow("string must only have characters CGTA!");
+
+        expect(() => {
+            getComplementaryDNA(" ");
+        }).toThrow("string must only have characters CGTA!");
+    });
+
+    test("returns complimentary DNA when string only has characters CGTA", () => {
+        expect(getComplementaryDNA("AAAAAA")).toBe("TTTTTT");
+        expect(getComplementaryDNA("AT")).toBe("TA");
+        expect(getComplementaryDNA("GC")).toBe("CG");
+        expect(getComplementaryDNA("ACTG")).toBe("TGAC");
+        expect(getComplementaryDNA("CCCGGGAT")).toBe("GGGCCCTA");
+    });
+});
