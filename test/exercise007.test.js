@@ -2,8 +2,8 @@ const {
     sumDigits,
     createRange,
     getScreentimeAlertList,
-    hexToRGB
-//    findWinner
+    hexToRGB,
+    findWinner
 } = require("../challenges/exercise007");
 
 const { TestScheduler } = require("jest");
@@ -186,5 +186,61 @@ describe("hexToRGB", () => {
     test("if passed #0080C0 returns rgb(0,128,192).", () => {
         expect(hexToRGB("#0080C0")).toBe("rgb(0,128,192)");
     });    
+});
 
+describe("findWinner", () => {
+    test("check if the winner is in the first vertical and is an X.", () => {
+        const board = [ ["X", "0", null],
+                        ["X", null, "0"],
+                        ["X", null, "0"]];
+    expect(findWinner(board)).toBe("X");
+    });
+    test("check if the winner is in the second vertical and is a 0.", () => {
+        const board = [ ["X", "0", null],
+                        ["X", "0", "0"],
+                        [null, "0", "X"]];
+    expect(findWinner(board)).toBe("0");
+    });
+    test("check if the winner is in the third vertical and is a 0.", () => {
+        const board = [ ["X", "0", "0"],
+                        ["X", null, "0"],
+                        [null, "0", "0"]];
+    expect(findWinner(board)).toBe("0");
+    });
+    test("check if the winner is in the first horizontal and is a X.", () => {
+        const board = [ ["X", "X", "X"],
+                        ["X", null, "0"],
+                        [null, "0", "0"]];
+    expect(findWinner(board)).toBe("X");
+    });
+    test("check if the winner is in the second horizontal and is a 0.", () => {
+        const board = [ ["X", null, "X"],
+                        ["0", "0", "0"],
+                        [null, "0", "0"]];
+    expect(findWinner(board)).toBe("0");
+    });
+    test("check if the winner is in the third horizontal and is a X.", () => {
+        const board = [ ["X", null, "X"],
+                        [null, "0", "0"],
+                        ["X", "X", "X"]];
+    expect(findWinner(board)).toBe("X");
+    });
+    test("check if the winner is in the first DIAGONAL and is a X.", () => {
+        const board = [ ["X", null, "X"],
+                        ["0", "X", "0"],
+                        ["0", null, "X"]];
+    expect(findWinner(board)).toBe("X");
+    });
+    test("check if the winner is in the second DIAGONAL and is a 0.", () => {
+        const board = [ ["X", null, "0"],
+                        ["X", "0", "0"],
+                        ["0", null, "X"]];
+    expect(findWinner(board)).toBe("0");
+    });
+    test("check if there is no winner (null)", () => {
+        const board = [ ["X", null, "0"],
+                        ["X", "0", "0"],
+                        [null, null, "X"]];
+    expect(findWinner(board)).toBe(null);
+    });
 });

@@ -141,6 +141,24 @@ const hexToRGB = hexStr => {
  */
 const findWinner = board => {
   if (board === undefined) throw new Error("board is required");
+
+  win = null;
+
+  // horizontal
+  if (board[0][0] == board[0][1] && board[0][0] == board[0][2]) {win = board[0][0];}
+  if (board[1][0] == board[1][1] && board[1][0] == board[1][2]) {win = board[1][0];}
+  if (board[2][0] == board[2][1] && board[2][0] == board[2][2]) {win = board[2][0];}
+
+  // vertical
+  if (board[0][0] == board[1][0] && board[0][0] == board[2][0]) {win = board[0][0];}
+  if (board[0][1] == board[1][1] && board[0][1] == board[2][1]) {win = board[0][1];}
+  if (board[0][2] == board[1][2] && board[0][2] == board[2][2]) {win = board[0][2];}
+
+  // diagonal
+  if (board[0][0] == board[1][1] && board[0][0] == board[2][2]) {win = board[0][0];}
+  if (board[0][2] == board[1][1] && board[0][2] == board[2][0]) {win = board[0][2];}
+  
+  return(win);
 };
 
 module.exports = {
