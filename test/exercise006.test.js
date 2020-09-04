@@ -2,7 +2,8 @@ const {
     sumMultiples, 
     isValidDNA,
     getComplementaryDNA,
-    isItPrime
+    isItPrime,
+    createMatrix
 } = require("../challenges/exercise006");
 
 const { TestScheduler } = require("jest");
@@ -133,3 +134,61 @@ describe("isItPrime", () => {
     });
 });
 
+describe("createMatrix", () => {
+    test("it throws an error if not passed a number in n.", () => {
+        expect(() => {
+            createMatrix();
+        }).toThrow("n is required");
+
+        expect(() => {
+            createMatrix("foo", "foo");
+        }).toThrow("a number is required");
+
+        expect(() => {
+            createMatrix(true, "foo");
+        }).toThrow("a number is required");
+    });
+
+    test("it throws an error if not passed a string in fill.", () => {
+        expect(() => {
+            createMatrix(1, 1);
+        }).toThrow("a string is required");
+
+        expect(() => {
+            createMatrix(1, true);
+        }).toThrow("a string is required");
+    });
+
+    test("it throws an error if n <= 0", () => {
+        expect(() => {
+            createMatrix(0, "foo");
+        }).toThrow("n must be > 0");
+
+        expect(() => {
+            createMatrix(-3, "foo");
+        }).toThrow("n must be > 0");
+    });
+
+    test("it throws an error if n is not integer", () => {
+        expect(() => {
+            createMatrix(1.2, "foo");
+        }).toThrow("n must be integer");
+    });
+
+    test("it returns a matrix of 1 * 1 when passed 1", () => {
+        const result = createMatrix(1, "foo");
+        const expected = [ ["foo"] ]; // => complex value
+        expect(result).toEqual(expected);
+    });
+
+    test("it returns a matrix of 5 * 5 when passed 5", () => {
+        const result = createMatrix(5, "foo");
+        const expected = [ ["foo", "foo", "foo", "foo", "foo"],
+                           ["foo", "foo", "foo", "foo", "foo"],
+                           ["foo", "foo", "foo", "foo", "foo"],
+                           ["foo", "foo", "foo", "foo", "foo"],
+                           ["foo", "foo", "foo", "foo", "foo"] ]; // => complex value
+        expect(result).toEqual(expected);
+    });
+
+});
